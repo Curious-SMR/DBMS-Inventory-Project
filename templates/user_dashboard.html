@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}User Dashboard{% endblock %}
+
+{% block content %}
+<h1>User Dashboard</h1>
+
+<div class="summary-cards">
+    <p><strong>Total Products:</strong> {{ total_products }}</p>
+    <p><strong>Total Inventory Value:</strong> ${{ "%.2f"|format(total_value) }}</p>
+</div>
+
+<hr>
+
+<!-- NEW: Displaying the Nested Query Requirement -->
+<h2>Premium Insights</h2>
+<p><em>Products priced strictly higher than the average of their respective categories:</em></p>
+
+{% if premium_products %}
+<table>
+    <tr>
+        <th>Product Name</th>
+        <th>Category</th>
+        <th>Premium Price</th>
+    </tr>
+    {% for p in premium_products %}
+    <tr>
+        <td>{{ p.name }}</td>
+        <td>{{ p.category_name }}</td>
+        <td>${{ "%.2f"|format(p.price) }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No premium products found in your inventory yet.</p>
+{% endif %}
+
+{% endblock %}
