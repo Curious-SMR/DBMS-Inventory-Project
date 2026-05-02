@@ -7,11 +7,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key_here'
 
-# Database Configuration - UPDATE YOUR PASSWORD HERE
 DB_CONFIG = {
     'host': 'localhost',
     'user': 'root',
-    'password': '2024A7PS0284U', # Put your recovered/new password here
+    'password': '2024A7PS0284U',
     'database': 'inventory_manager'
 }
 
@@ -63,8 +62,6 @@ def user_dashboard():
     total_result = cursor.fetchone()['total']
     total_value = total_result if total_result else 0
 
-    # THE ASSIGNMENT REQUIREMENT: Nested/Correlated Query
-    # Finds products priced higher than their specific category average
     nested_query = """
         SELECT p1.name, p1.price, c.name AS category_name
         FROM product p1
@@ -80,7 +77,6 @@ def user_dashboard():
     cursor.close()
 
     username = session['username']
-    # You will need to update user_dashboard.html to display 'premium_products'
     return render_template('user_dashboard.html', 
                            total_products=total_products, 
                            total_value=total_value, 
@@ -149,8 +145,10 @@ def add_product():
     name = request.form['name']
     quantity = int(request.form['quantity'])
     price = float(request.form['price'])
-    # Fallback to category 1 if you haven't added a category dropdown to your HTML form yet
-    category_id = int(request.form.get('category_id', 1)) 
+    
+    # FIX 2 APPLIED: Strictly casting the required form input to an integer
+    category_id = int(request.form['category_id']) 
+    
     user_id = session['user_id']
     
     db = get_db()

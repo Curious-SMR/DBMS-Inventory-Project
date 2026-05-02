@@ -1,19 +1,20 @@
 /* styles.css */
 
-/* --- 1. Root Variables & Reset (For Modern Looks) --- */
+/* --- 1. Root Variables & Reset (Permanent Dark Theme) --- */
 :root {
-    --primary-color: #4361ee; /* Slate Blue */
-    --hover-color: #3f37c9;
-    --success-color: #2ec4b6;
-    --error-color: #e63946;
-    --text-main: #2b2d42;
-    --text-muted: #8d99ae;
-    --bg-page: #edf2f4;
-    --bg-card: #ffffff;
-    --border-light: #dee2e6;
+    --primary-color: #5c7cfa; /* Brighter blue for text/buttons to pop on dark backgrounds */
+    --header-bg: #0f38a5; /* Deep, rich blue for the header */
+    --hover-color: #4c6ef5;
+    --success-color: #20c997;
+    --error-color: #ff6b6b;
+    --text-main: #e8e6e3; /* Off-white for general text readability */
+    --text-muted: #a8a095; /* Muted grey for labels and table headers */
+    --bg-page: #181a1b; /* Dark Reader's signature background color */
+    --bg-card: #222426; /* Slightly lighter dark grey for the main container */
+    --border-light: #383c3f; /* Subtle dark borders */
     --radius-md: 8px;
     --radius-sm: 4px;
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
     --transition-fast: all 0.2s ease-in-out;
 }
 
@@ -22,7 +23,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--bg-page);
@@ -37,7 +38,7 @@ body {
 }
 
 .container {
-    animation: fadeInPage 0.4s ease-out; /* subtle page fade-in */
+    animation: fadeInPage 0.4s ease-out;
     max-width: 900px;
     margin: 30px auto;
     padding: 30px;
@@ -52,7 +53,7 @@ h1, h2, h3 {
 }
 
 h1 { font-size: 2.2rem; }
-h2 { font-size: 1.5rem; margin-top: 20px; color: var(--text-muted); }
+h2 { font-size: 1.5rem; margin-top: 20px; color: var(--text-main); }
 
 hr {
     border: 0;
@@ -62,7 +63,7 @@ hr {
 
 /* --- Header & Navigation --- */
 .header {
-    background-color: var(--primary-color);
+    background-color: var(--header-bg);
     color: #ffffff;
     padding: 20px 0;
     text-align: center;
@@ -121,21 +122,21 @@ hr {
 }
 
 .flashes li.error {
-    background-color: #ffdad9;
-    color: #bc1a23;
-    border: 1px solid #ffb6b4;
+    background-color: rgba(230, 57, 70, 0.1);
+    color: var(--error-color);
+    border: 1px solid rgba(230, 57, 70, 0.3);
 }
 
 .flashes li.success {
-    background-color: #cff4f0;
-    color: #0e8374;
-    border: 1px solid #9eeaf9;
+    background-color: rgba(46, 196, 182, 0.1);
+    color: var(--success-color);
+    border: 1px solid rgba(46, 196, 182, 0.3);
 }
 
 /* --- Form Styles --- */
 form {
     margin-bottom: 25px;
-    background-color: #f8f9fa;
+    background-color: var(--bg-page);
     padding: 20px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-light);
@@ -146,21 +147,23 @@ form label {
     margin-bottom: 7px;
     font-weight: 600;
     font-size: 0.9rem;
-    color: var(--text-main);
+    color: var(--text-muted);
 }
 
 form input[type="text"],
 form input[type="number"],
 form input[type="password"],
-form select { /* Added SELECT styling */
+form select { 
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
+    background-color: var(--bg-card);
+    color: var(--text-main);
     border: 1px solid var(--border-light);
     border-radius: var(--radius-sm);
     font-size: 1rem;
     font-family: inherit;
-    transition: var(--transition-fast); /* subtle interaction animation */
+    transition: var(--transition-fast); 
 }
 
 /* Animation: Form Input Glow on Focus */
@@ -168,11 +171,11 @@ form input:focus,
 form select:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+    box-shadow: 0 0 0 3px rgba(92, 124, 250, 0.15);
 }
 
 form input[type="submit"] {
-    width: 100%; /* modern wide button */
+    width: 100%;
     padding: 12px;
     font-size: 1rem;
     font-weight: 600;
@@ -181,12 +184,12 @@ form input[type="submit"] {
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: var(--transition-fast); /* subtle hover animation */
+    transition: var(--transition-fast);
 }
 
 form input[type="submit"]:hover {
     background-color: var(--hover-color);
-    transform: translateY(-1px); /* very subtle lift */
+    transform: translateY(-1px);
 }
 
 /* --- Table Styles --- */
@@ -205,8 +208,8 @@ table td {
 }
 
 table th {
-    background-color: #f8f9fa;
-    color: var(--text-main);
+    background-color: var(--bg-page);
+    color: var(--text-muted);
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.8rem;
@@ -214,16 +217,15 @@ table th {
 }
 
 table tr {
-    transition: var(--transition-fast); /* interaction animation */
+    transition: var(--transition-fast);
 }
 
 /* Animation: Table Row Highlight */
 table tr:hover {
-    background-color: #f1f3f5;
+    background-color: #2b2f31;
 }
 
-/* --- Action Link Buttons (index.html) --- */
-/* Your HTML doesn't have classes, so we style links in cells */
+/* --- Action Link Buttons --- */
 table td a {
     font-size: 0.85rem;
     text-decoration: none;
@@ -240,7 +242,6 @@ table td a:hover {
 }
 
 /* --- User Dashboard Specifics --- */
-/* NEW Layout: Summary Cards (using Flexbox) */
 .summary-cards {
     display: flex;
     gap: 20px;
@@ -249,12 +250,15 @@ table td a:hover {
 
 .summary-cards p {
     flex: 1;
-    background-color: #f8f9fa;
+    background-color: var(--bg-page);
     padding: 20px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-light);
     margin: 0;
     text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
 .summary-cards p strong {
@@ -264,10 +268,4 @@ table td a:hover {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 10px;
-}
-
-.summary-cards p {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary-color);
 }
